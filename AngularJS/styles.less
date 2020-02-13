@@ -1,0 +1,58 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+body {
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+.hidden {
+  display: none !important;
+}
+
+.btn {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 12px;
+  text-decoration: none;
+  background-color: white;
+
+  &:hover {
+    background-color: #ddd;
+    color: black
+  }
+}
+
+.btn-close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  border-radius: 50%;
+  text-align: center;
+  text-decoration: none;
+
+  width: 16px;
+  height: 16px;
+  line-height: 14px;
+  font-size: 16px;
+
+  &:hover {
+    background-color: #d90000;
+    color: white;
+  }
+}
+
+@import "components/am-notes-app/styles";
+@import "components/am-notes-form/styles";
+@import "components/am-notes-list/styles";
