@@ -4,7 +4,8 @@
 
     angular.module("app.directives")
 
-        // very small directive select focun on the element after initialization
+        // very small directive select focus on the element after initialization
+        // it contains only link (afterLink) function
         .directive("ngFocus", function () {
             return function (scope, el) {
                 el[0].focus();
@@ -20,7 +21,7 @@
             },
             // language=HTML
             template: `
-                <div ng-if="$ctrl.show" ng-mousedown="$ctrl.ovClick($event)" class="overlay">
+                <div ng-if="$ctrl.show" ng-mousedown="$ctrl.ovrClick($event)" class="overlay">
                     <div class="form">
                         <label for="subject">
                             Subject:
@@ -49,7 +50,7 @@
                     $scope.$on('note:edit', (e, note) => this.edit(note));
                 }
 
-                ovClick($event) {
+                ovrClick($event) {
                     if ($event.target.classList.contains('overlay')) {
                         this.show = false;
                     }

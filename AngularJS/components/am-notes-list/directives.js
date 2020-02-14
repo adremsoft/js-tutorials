@@ -3,8 +3,11 @@
     "use strict";
 
     angular.module("app.directives")
+        // A directive renders inside of existing element so this one
+        // should be used only as attribute
         .directive("amNotesItem", function () {
             return {
+                restrict :'A',
                 scope: {
                     note: '<amNotesItem'
                 },
@@ -16,22 +19,22 @@
             };
         })
 
-        .directive("amNotesList", function () {
-            return {
-                scope: {
-                    notes: '<',
-                    search: '<',
-                    onEdit: '&'
-                },
-                // language=HTML
-                template: `
-                    <ul>
-                        <li ng-repeat="note in notes | filter:search.toLowerCase() track by $index"
-                            am-notes-item="note"
-                            ng-click="onEdit({$event,note})"
-                            class="{{note.category.toLowerCase()}}">
-                        </li>
-                    </ul>`
-            };
+        // The component mast be used as a tag (similar to custom component
+        .component("amNotesList", {
+            bindings: {
+                notes: '<',
+                search: '<',
+                onEdit: '&'
+            },
+            // language=HTML
+            template: `
+                <ul>
+                    <li ng-repeat="note in $ctrl.notes | filter:$ctrl.search.toLowerCase() track by $index"
+                        am-notes-item="note"
+                        ng-click="$ctrl.onEdit({$event,note})"
+                        class="{{note.category.toLowerCase()}}">
+                        {{note}}
+                    </li>
+                </ul>`
         })
 })();
