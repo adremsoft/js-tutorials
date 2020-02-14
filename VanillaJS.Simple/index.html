@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Notes</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body bind="click:onBodyClick">
+
+<header>
+    <label for="search">
+        <input type="search" id="search" placeholder="search" bind="input:onSearchInput">
+    </label>
+    <a href="#" class="btn" bind="click:add">Add Note</a>
+</header>
+
+<ul class="notes"></ul>
+
+<script src="app.js"></script>
+</body>
+
+
+</html>
