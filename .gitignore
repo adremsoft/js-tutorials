@@ -73,4 +73,5 @@ fabric.properties
 
 
 LitHtml.Components.ts/**/*.js
+LitHtml.Components.ts/**/*.js.map
 

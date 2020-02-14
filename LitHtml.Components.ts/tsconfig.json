@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "module": "ES2015",
+    "target": "ES2019",
+    "moduleResolution": "Node",
+    "sourceMap": true,
+    "alwaysStrict": true,
+    "strict": true,
+    "removeComments": true,
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "paths": {
+      "/web_modules/*.js": [
+        "node_modules/@types/*",
+        "node_modules/*",
+        "web_modules/*.js"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
