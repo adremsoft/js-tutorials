@@ -1,4 +1,6 @@
+// @ts-ignore
 import {html, render} from 'https://unpkg.com/lit-html@1.1.2/lit-html.js';
+// @ts-ignore
 import {repeat} from 'https://unpkg.com/lit-html@1.1.2/directives/repeat.js';
 
 function isChildOf(c: any, p: HTMLElement) {
