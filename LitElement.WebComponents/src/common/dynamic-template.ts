@@ -1,10 +1,14 @@
 import {render} from "lit-html";
-import {html, LitElement} from "lit-element";
+import {html} from "lit-element";
 import {EventEmitter} from "./events.js";
 
 const scopes = new WeakMap();
 
-export function handleEvent(event: string = '') {
+/**
+ * @emitEvent decorator
+ * @param event
+ */
+export function emitEvent(event: string = '') {
     return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
         const originalMethod = descriptor.value;
         descriptor.value = function (...args: any) {
@@ -17,9 +21,13 @@ export function handleEvent(event: string = '') {
     }
 }
 
-export function noShadowDOM(constructor: Function) {
+/**
+ * withoutShadowDOM decorator - disable shadowDOM for the component
+ * @param constructor
+ */
+export function withoutShadowDOM(constructor: Function) {
     // override createRenderRoot
-    constructor.prototype.createRenderRoot = function()  {
+    constructor.prototype.createRenderRoot = function () {
         return this;
     }
 }

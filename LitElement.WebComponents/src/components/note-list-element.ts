@@ -2,10 +2,10 @@ import {repeat} from "lit-html/directives/repeat";
 import {customElement, html, LitElement, property} from "lit-element";
 import {Note, NoteList} from "../services/note-list.js";
 import {customEvent} from "../common/events.js";
-import {noShadowDOM} from "../common/dynamic-template.js";
+import {withoutShadowDOM} from "../common/dynamic-template.js";
 
 @customElement('x-note')
-@noShadowDOM
+@withoutShadowDOM
 class NoteElement extends LitElement {
     @property({type: Note}) note: Note | undefined;
 
@@ -19,7 +19,7 @@ class NoteElement extends LitElement {
 }
 
 @customElement('x-notes')
-@noShadowDOM
+@withoutShadowDOM
 class NoteListElement extends LitElement {
     private data: NoteList | null = null;
 

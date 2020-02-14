@@ -1,6 +1,6 @@
 import {html} from "lit-html";
 import {Note} from "../services/note-list.js";
-import {DynamicTemplate, handleEvent} from "../common/dynamic-template.js";
+import {DynamicTemplate, emitEvent} from "../common/dynamic-template.js";
 
 
 //type ExtendedProperties<T> = P in keyof T;
@@ -8,13 +8,13 @@ import {DynamicTemplate, handleEvent} from "../common/dynamic-template.js";
 class EditForm extends DynamicTemplate {
     private data: Note | null = null;
 
-    @handleEvent()
+    @emitEvent()
     onUpdate() {
         this.detach();
         return this.data;
     }
 
-    @handleEvent()
+    @emitEvent()
     onDelete() {
         this.detach();
         return this.data?.id;
