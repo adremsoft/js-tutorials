@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e8063b1a-7ca1-4213-be47-837b44c2398a" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Less File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="ProjectId" id="1Xig5zcTkpViPlbljZTNr5Iu3P8" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../VanillaJS.v4" />
+    <property name="list.type.of.created.stylesheet" value="Less" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="Settings.JavaScript.Linters.JSHint" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="Z:\oncoming\2020\Research\VanillaJS.v3\components\edit-form" />
+      <recent name="Z:\oncoming\2020\Research\VanillaJS.v3\components\notes" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="Z:\oncoming\2020\Research\VanillaJS.v3" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/VanillaJS.v3/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.index.html" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e8063b1a-7ca1-4213-be47-837b44c2398a" name="Default Changelist" comment="" />
+      <created>1581534149374</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1581534149374</updated>
+      <workItem from="1581534150529" duration="8280000" />
+      <workItem from="1581551391916" duration="1165000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="919" y="505" key="EditFileWatcherDialog" timestamp="1581534214743">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state x="919" y="505" key="EditFileWatcherDialog/0.0.2560.1410/-1920.0.1920.1200/2560.0.2560.1440@0.0.2560.1410" timestamp="1581534214743" />
+    <state x="1060" y="464" key="FileChooserDialogImpl" timestamp="1581542433231">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state x="1060" y="464" key="FileChooserDialogImpl/0.0.2560.1410/-1920.0.1920.1200/2560.0.2560.1440@0.0.2560.1410" timestamp="1581542433231" />
+    <state x="783" y="351" key="SettingsEditor" timestamp="1581539089091">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state x="783" y="351" key="SettingsEditor/0.0.2560.1410/-1920.0.1920.1200/2560.0.2560.1440@0.0.2560.1410" timestamp="1581539089091" />
+    <state x="987" y="461" width="586" height="488" key="find.popup" timestamp="1581539116051">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state x="987" y="461" width="586" height="488" key="find.popup/0.0.2560.1410/-1920.0.1920.1200/2560.0.2560.1440@0.0.2560.1410" timestamp="1581539116051" />
+    <state width="889" height="344" key="javadoc.popup.new" timestamp="1581541318537">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state width="889" height="344" key="javadoc.popup.new/0.0.2560.1410/-1920.0.1920.1200/2560.0.2560.1440@0.0.2560.1410" timestamp="1581541318537" />
+  </component>
+</project>
