@@ -53,5 +53,6 @@ export class ObservableList<Element extends ObservableListElement> extends Array
         this.length = 0;
         this.push(...data);
         this.lastId = this.reduce((pv, v) => v.id > pv ? v.id : pv, 0);
+        this.changed();
     }
 }
