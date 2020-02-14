@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Notes</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header>
+    <label for="search">
+        <input type="search" id="search" placeholder="search" bind="input:onSearch">
+    </label>
+    <a href="#" class="btn" bind="click:onAdd">Add Note</a>
+</header>
+
+<ul id="notes">
+    <!-- render notes here -->
+</ul>
+
+<div id="new-note" class="hidden overlay" bind="click:ovClick">
+    <div class="form">
+        <label for="subject">
+            Subject:
+            <input type="text" id="subject">
+        </label>
+        <label for="content">
+            Content:
+            <textarea id="content"></textarea>
+        </label>
+        <label for="content">
+            Category:
+            <select id="category">
+                <option>Important</option>
+                <option>Normal</option>
+                <option>Disabled</option>
+            </select>
+        </label>
+        <a href="#" class="btn btn-update" bind="click:update">Update</a>
+        <a href="#" class="btn btn-del" bind="click:delete">Delete</a>
+        <a href="#" class="btn-close" bind="click:hide">&times;</a>
+    </div>
+</div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

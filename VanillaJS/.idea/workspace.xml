@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b59e770e-0846-40d8-9409-0d574bcf2709" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Less File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1XS1pMUrqcHIxmz8YZ7N9HCEtoH" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../VanillaJS.v3" />
+    <property name="list.type.of.created.stylesheet" value="Less" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="settings.javascript.linters.tslint" />
+  </component>
+  <component name="RunManager">
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/vanilaJS/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.index.html" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b59e770e-0846-40d8-9409-0d574bcf2709" name="Default Changelist" comment="" />
+      <created>1581024863691</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1581024863691</updated>
+      <workItem from="1581024864857" duration="9374000" />
+      <workItem from="1581038466176" duration="1794000" />
+      <workItem from="1581040661725" duration="119000" />
+      <workItem from="1581041112437" duration="1370000" />
+      <workItem from="1581075816189" duration="4706000" />
+      <workItem from="1581125594808" duration="17000" />
+      <workItem from="1581256142712" duration="279000" />
+      <workItem from="1581349451051" duration="260000" />
+      <workItem from="1581349733717" duration="413000" />
+      <workItem from="1581530837919" duration="3088000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="734" y="364" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1581256328774">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state x="734" y="364" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1410/-1920.0.1920.1200/2560.0.2560.1440@0.0.2560.1410" timestamp="1581256328774" />
+    <state x="919" y="505" key="EditFileWatcherDialog" timestamp="1581029578648">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state x="919" y="505" key="EditFileWatcherDialog/0.0.2560.1410/-1920.0.1920.1200/2560.0.2560.1440@0.0.2560.1410" timestamp="1581029578648" />
+    <state x="1060" y="464" key="FileChooserDialogImpl" timestamp="1581534148301">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state x="1060" y="464" key="FileChooserDialogImpl/0.0.2560.1410/-1920.0.1920.1200/2560.0.2560.1440@0.0.2560.1410" timestamp="1581534148301" />
+    <state width="1888" height="486" key="GridCell.Tab.0.bottom" timestamp="1581034246175">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state width="1888" height="486" key="GridCell.Tab.0.bottom/0.0.2560.1410/-1920.0.1920.1200/2560.0.2560.1440@0.0.2560.1410" timestamp="1581034246175" />
+    <state width="1888" height="486" key="GridCell.Tab.0.center" timestamp="1581034246175">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state width="1888" height="486" key="GridCell.Tab.0.center/0.0.2560.1410/-1920.0.1920.1200/2560.0.2560.1440@0.0.2560.1410" timestamp="1581034246175" />
+    <state width="1888" height="486" key="GridCell.Tab.0.left" timestamp="1581034246175">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state width="1888" height="486" key="GridCell.Tab.0.left/0.0.2560.1410/-1920.0.1920.1200/2560.0.2560.1440@0.0.2560.1410" timestamp="1581034246175" />
+    <state width="1888" height="486" key="GridCell.Tab.0.right" timestamp="1581034246175">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state width="1888" height="486" key="GridCell.Tab.0.right/0.0.2560.1410/-1920.0.1920.1200/2560.0.2560.1440@0.0.2560.1410" timestamp="1581034246175" />
+    <state width="1888" height="486" key="GridCell.Tab.1.bottom" timestamp="1581034246175">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state width="1888" height="486" key="GridCell.Tab.1.bottom/0.0.2560.1410/-1920.0.1920.1200/2560.0.2560.1440@0.0.2560.1410" timestamp="1581034246175" />
+    <state width="1888" height="486" key="GridCell.Tab.1.center" timestamp="1581034246175">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state width="1888" height="486" key="GridCell.Tab.1.center/0.0.2560.1410/-1920.0.1920.1200/2560.0.2560.1440@0.0.2560.1410" timestamp="1581034246175" />
+    <state width="1888" height="486" key="GridCell.Tab.1.left" timestamp="1581034246175">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state width="1888" height="486" key="GridCell.Tab.1.left/0.0.2560.1410/-1920.0.1920.1200/2560.0.2560.1440@0.0.2560.1410" timestamp="1581034246175" />
+    <state width="1888" height="486" key="GridCell.Tab.1.right" timestamp="1581034246175">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state width="1888" height="486" key="GridCell.Tab.1.right/0.0.2560.1410/-1920.0.1920.1200/2560.0.2560.1440@0.0.2560.1410" timestamp="1581034246175" />
+    <state x="783" y="351" key="SettingsEditor" timestamp="1581256348720">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state x="783" y="351" key="SettingsEditor/0.0.2560.1410/-1920.0.1920.1200/2560.0.2560.1440@0.0.2560.1410" timestamp="1581256348720" />
+    <state x="92" y="92" width="2376" height="1226" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1581534040086">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state x="92" y="92" width="2376" height="1226" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.2560.1410/-1920.0.1920.1200/2560.0.2560.1440@0.0.2560.1410" timestamp="1581534040086" />
+    <state width="889" height="344" key="javadoc.popup.new" timestamp="1581533051403">
+      <screen x="0" y="0" width="2560" height="1410" />
+    </state>
+    <state width="889" height="344" key="javadoc.popup.new/0.0.2560.1410/-1920.0.1920.1200/2560.0.2560.1440@0.0.2560.1410" timestamp="1581533051403" />
+  </component>
+</project>

@@ -1,0 +1,173 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+}
+body * {
+  box-sizing: border-box;
+}
+.hidden {
+  display: none !important;
+}
+body {
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+}
+body header {
+  display: flex;
+  flex-flow: row nowrap;
+  padding: 15px;
+  background-color: aliceblue;
+}
+body header a.btn {
+  margin-left: auto;
+  display: inline-block;
+}
+body ul {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-content: flex-start;
+  width: 100%;
+  flex: 1;
+  overflow: auto;
+  list-style: none;
+  padding: 0;
+}
+body ul li {
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  width: 250px;
+  height: 200px;
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+}
+body ul li.normal {
+  background-color: white;
+}
+body ul li.important {
+  background-color: #ffe8ea;
+}
+body ul li.disabled {
+  background-color: whitesmoke;
+}
+body ul li.disabled h2,
+body ul li.disabled h3,
+body ul li.disabled p {
+  opacity: 0.5;
+}
+body ul li h2,
+body ul li h3 {
+  margin: 0;
+  font-weight: normal;
+}
+body ul li h2 {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+body ul li h3 {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 10px;
+  color: #777;
+}
+body ul li p {
+  overflow: hidden;
+  font-size: 12px;
+  flex: 1;
+  margin: 0;
+}
+.btn {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 12px;
+  text-decoration: none;
+  background-color: white;
+}
+.btn:hover {
+  background-color: #ddd;
+  color: black;
+}
+.btn-close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  border-radius: 50%;
+  text-align: center;
+  text-decoration: none;
+  width: 16px;
+  height: 16px;
+  line-height: 1;
+  font-size: 16px;
+}
+.btn-close:hover {
+  background-color: #d90000;
+  color: white;
+}
+#new-note {
+  position: absolute;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.25);
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+#new-note .form {
+  position: absolute;
+  background-color: white;
+  width: 300px;
+  height: 300px;
+  padding: 15px 30px;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  margin-top: 10%;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+}
+#new-note .form label {
+  display: block;
+  margin: 15px auto;
+  font-size: 13px;
+}
+#new-note .form input,
+#new-note .form select,
+#new-note .form textarea {
+  display: block;
+  margin: 3px 0;
+  width: 100%;
+}
+#new-note .form textarea {
+  resize: none;
+  height: 70px;
+}
+#new-note .form a.btn {
+  float: right;
+}
+#new-note .form a.btn.btn-del {
+  float: left;
+}
+#new-note .form .btn-update {
+  background-color: dodgerblue;
+  color: white;
+}
+#new-note .form .btn-update:hover {
+  background-color: #0077ea;
+}
+/*# sourceMappingURL=styles.css.map */
