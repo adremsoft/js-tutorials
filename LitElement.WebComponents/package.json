@@ -1,0 +1,31 @@
+{
+  "name": "adrem-lit-el-sample",
+  "version": "1.0.0",
+  "description": "AdRem Lit-Element example",
+  "scripts": {
+    "prepare": "snowpack"
+  },
+  "author": "",
+  "license": "ISC",
+  "snowpack": {
+    "dedupe": [
+      "lit-html"
+    ],
+    "webDependencies": [
+      "es-module-shims",
+      "lit-html",
+      "lit-html/lib/*.js",
+      "lit-html/directives/*.js",
+      "lit-element"
+    ]
+  },
+  "dependencies": {
+    "es-module-shims": "^0.4.6",
+    "htm": "^3.0.3",
+    "lit-element": "^2.2.1",
+    "lit-html": "^1.1.2"
+  },
+  "devDependencies": {
+    "snowpack": "^1.2.0"
+  }
+}

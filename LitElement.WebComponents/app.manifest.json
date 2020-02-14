@@ -1,0 +1,13 @@
+{
+  "id": "NoteApp",
+  "name": "AdRem Note App",
+  "ver": 1.0,
+  "start": "/",
+  "relRootPath" : "../",
+  "frameless": false,
+  "fixed": true,
+  "width": 800,
+  "height": 650,
+  "minWidth" : 800,
+  "minHeight" : 600
+}
