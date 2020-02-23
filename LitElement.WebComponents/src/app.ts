@@ -6,9 +6,10 @@ import {NoteList} from "./services/note-list.js";
 // custom elements
 import "./components/note-list-element.js";
 import "./components/app-header-element.js";
+import {withoutShadowDOM} from "./common/dynamic-template.js";
 
 const
-    isChildOf = (c : HTMLElement | null, p : HTMLElement | null) => {
+    isChildOf = (c: HTMLElement | null, p: HTMLElement | null) => {
         do {
             c = <HTMLElement | null>c?.parentNode;
         } while (c !== p && c != null);
@@ -17,6 +18,7 @@ const
 
 
 @customElement('x-app')
+@withoutShadowDOM
 export class AppElement extends LitElement {
     @property({type: String}) searchText = '';
     notes: NoteList;
@@ -37,11 +39,11 @@ export class AppElement extends LitElement {
         editForm.edit(this.notes.new());
     }
 
-    onSearch(e : CustomEvent) {
+    onSearch(e: CustomEvent) {
         this.searchText = e.detail.text.toLowerCase();
     }
 
-    static onEdit(e : CustomEvent) {
+    static onEdit(e: CustomEvent) {
         editForm.edit(e.detail);
     }
 
@@ -55,11 +57,6 @@ export class AppElement extends LitElement {
                 editForm.detach();
             }
         });
-    }
-
-    // we need no shadow DOM as we have to change styling strategy
-    createRenderRoot() {
-        return this;
     }
 
     render() {
