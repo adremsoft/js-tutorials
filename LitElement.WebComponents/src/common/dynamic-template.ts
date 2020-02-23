@@ -46,9 +46,6 @@ export class DynamicTemplate {
     attach() {
         if (this.el == null) {
             this.el = document.body.appendChild(document.createElement('div'));
-            if (this.id != '') {
-                this.el.setAttribute('id', 'new-note');
-            }
             scopes.set(this.el, this);
         }
         render(this.html(), this.el);
