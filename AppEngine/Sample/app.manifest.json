@@ -1,0 +1,12 @@
+{
+  "id": "engine-test",
+  "name": "Engine Sample",
+  "ver": 1.0,
+  "start": "src/",
+  "frameless": false,
+  "fixed": true,
+  "width": 640,
+  "height": 550,
+  "minWidth" : 600,
+  "minHeight" : 400
+}
