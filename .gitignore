@@ -81,3 +81,4 @@ LitElement.WebComponents/node_modules/*
 LitElement.WebComponents/web_modules/*
 
 AngularJS.modules/*
+AppEngine/NodeServer/srv/node_modules/*
