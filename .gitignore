@@ -80,3 +80,4 @@ LitElement.WebComponents/**/*.js.map
 LitElement.WebComponents/node_modules/*
 LitElement.WebComponents/web_modules/*
 
+AngularJS.modules/*
