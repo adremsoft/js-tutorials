@@ -2,17 +2,13 @@
 
 const {LiveReport, DataListFieldType} = require("../lib/app-datalists");
 
-/*
-   StaticData is
-
-*/
-
 const
     MAX_RECS = 5;
 
 class ConsoleLog extends LiveReport {
     constructor() {
         super({
+            // this method can be called by dataList.perform("addMessage", { msg : 'some message' })
             addMessage({msg}) {
                 console.log(msg)
             }
