@@ -37,6 +37,7 @@ class AppServer {
     constructor() {
         this.registered = new Map();
         this.connections = new Map();
+        this.trace = false;
     }
 
     static getPrivateId() {
@@ -173,7 +174,9 @@ class AppServer {
                 }
             }
         }
-
+        if (this.trace) {
+            console.log(req);
+        }
         if (instance != null) {
             this.setConnContext(conn, instance);
             if (submethod) {
