@@ -5,6 +5,7 @@ body {
   margin: 0;
   background-color: whitesmoke;
   font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  overflow: auto;
 }
 .desc {
   font-size: 12px;
@@ -30,5 +31,46 @@ am-console {
   display: block;
   padding: 10px;
   margin: 10px;
+}
+am-todo {
+  display: block;
+  padding: 10px;
+  margin: 10px;
+}
+am-todo ul {
+  background-color: white;
+  list-style: none;
+  border: 1px solid #ddd;
+  height: 100px;
+  overflow: auto;
+  padding: 0;
+}
+am-todo ul li {
+  padding: 3px;
+}
+am-todo .controls {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  margin-bottom: 5px;
+}
+am-todo .controls .btn {
+  min-width: 50px;
+  margin-left: 5px;
+}
+[am-todo-item] {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+[am-todo-item]:hover {
+  background-color: aliceblue;
+}
+[am-todo-item] input {
+  margin: 0 10px;
+}
+[am-todo-item] .btn {
+  margin-left: auto;
+  zoom: 0.75;
 }
 /*# sourceMappingURL=styles.css.map */

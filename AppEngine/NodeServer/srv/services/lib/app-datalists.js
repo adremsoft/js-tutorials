@@ -18,6 +18,7 @@ const
     {registerRemoteInterface} = require("./app-server");
 
 const
+    NO_KEY = -1,
     DataListFieldType = {
         afString: 0,
         afBoolean: 1,
@@ -286,6 +287,7 @@ class DataListSource extends CustomDataList {
 }
 
 module.exports = {
+    NO_KEY,
     LiveReport,
     DataListSource,
     DataListFieldType,
@@ -308,3 +310,4 @@ module.exports = {
         provider.registerProvider(intfName, desc);
     }
 };
+

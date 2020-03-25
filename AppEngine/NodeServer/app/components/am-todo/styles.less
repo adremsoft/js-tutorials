@@ -1,0 +1,47 @@
+am-todo {
+  display: block;
+  padding: 10px;
+  margin: 10px;
+
+
+  ul {
+    background-color: white;
+    list-style: none;
+    border: 1px solid #ddd;
+    height: 100px;
+    overflow: auto;
+    padding: 0;
+    li {
+      padding: 3px;
+    }
+  }
+
+  .controls {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin-bottom: 5px;
+    .btn {
+      min-width: 50px;
+      margin-left: 5px;
+    }
+  }
+}
+
+[am-todo-item] {
+  //border: 1px solid red;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  &:hover {
+    background-color: aliceblue;
+  }
+  input {
+    margin: 0 10px;
+  }
+
+  .btn {
+    margin-left: auto;
+    zoom: 0.75
+  }
+}

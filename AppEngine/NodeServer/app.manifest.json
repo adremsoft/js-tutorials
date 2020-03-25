@@ -4,7 +4,7 @@
   "ver": 1.0,
   "start": "app/",
   "frameless": false,
-  "fixed": true,
+  "fixed": false,
   "width": 640,
   "height": 550,
   "minWidth" : 600,

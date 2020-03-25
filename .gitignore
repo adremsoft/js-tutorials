@@ -83,3 +83,6 @@ LitElement.WebComponents/web_modules/*
 AngularJS.modules/*
 AppEngine/NodeServer/srv/node_modules/*
 AppEngine/NodeServer/srv/services/.idea/*
+AppEngine/NodeServer/srv/*.drc
+AppEngine/NodeServer/srv/*.rsm
+AppEngine/NodeServer/srv/*.drc

@@ -33,7 +33,6 @@ function $args(func) {
 let
     privateInstance = 1;
 
-
 class AppServer {
     constructor() {
         this.registered = new Map();
@@ -110,7 +109,6 @@ class AppServer {
             .map(([name, def]) => ([name, getInterfaceDef(name, def.def)]))
         )
     }
-
 
     getInst(interfaceName, instance) {
         const def = this.registered.get(interfaceName);
@@ -229,6 +227,7 @@ module.exports = {
      */
     run() {
         appServer.start().then(() => {
+            adrem.Client.on('exception', e => console.error(e));
             adrem.Client.on(adrem.srv.IServer.id, (e) => {
                 appServer
                     .handleRequest(e.data.req)
@@ -237,15 +236,17 @@ module.exports = {
                             adrem.srv.IServer.response({id: e.data.id, res: [res]});
                         }
                     })
-                    .catch(e => {
-                        console.error(e);
+                    .catch(err => {
+                        console.error(err);
+                        if (e.data.id != null) {
+                            adrem.srv.IServer.response({id: e.data.id, res: []});
+                        }
                     })
             });
             adrem.srv.IServer.notifyStarted(() => serverStarted());
         });
         return this.ready;
     },
-
 
     /**
      * Register server service
@@ -286,3 +287,4 @@ global.restart = function () {
     adrem.srv.IServer.restart();
 };
 
+global._server = appServer;
