@@ -86,3 +86,4 @@ AppEngine/NodeServer/srv/services/.idea/*
 AppEngine/NodeServer/srv/*.drc
 AppEngine/NodeServer/srv/*.rsm
 AppEngine/NodeServer/srv/*.drc
+AppEngine/NodeServer/srv/NCServices.map
