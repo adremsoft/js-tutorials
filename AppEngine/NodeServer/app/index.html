@@ -12,6 +12,7 @@
     <script src="https://unpkg.com/angular@1.7.9/angular.min.js"></script>
     <script src="lib/client.min.js"></script>
     <script src="lib/RemoteDataLists.min.js"></script>
+    <!--    <script src="lib/RemoteDataListTree.js"></script>-->
 </head>
 <body ng-controller="appCtrl">
 
@@ -20,15 +21,21 @@
     <am-echo-test></am-echo-test>
     <am-console></am-console>
     <am-todo></am-todo>
+    <am-dashboard></am-dashboard>
 </div>
 
 
 <script src="scripts/app.js"></script>
 <script src="scripts/controller.js"></script>
 <script src="components/am-echo-test/directives.js"></script>
-<script src="components/am-console/directives.js"></script>
-<script src="components/am-todo/directives.js"></script>
 
+<script src="components/am-console/directives.js"></script>
+<script src="components/am-console/services.js"></script>
+
+<script src="components/am-todo/directives.js"></script>
+<script src="components/am-todo/services.js"></script>
+
+<!--<script src="components/am-dashboard/directives.js"></script>-->
 
 </body>
 </html>

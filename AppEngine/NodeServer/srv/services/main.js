@@ -8,6 +8,7 @@ const
 require("./examples/remote-interfaces")(server);
 require("./examples/livereport")(server);
 require("./examples/todolist")(server);
+require("./examples/datatree")(server);
 
 // and then start the server
 server.run();

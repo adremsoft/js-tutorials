@@ -84,8 +84,8 @@ class DataTreeNode {
     constructor(owner, id, parent, name, value) {
         this.id = id;
         this.name = name;
-        this.values = new DataTreeValues((name) => new DataTreeNode(this._owner, this._owner._nextKey, this, name));
-        this._owner = owner;
+        this.values = new DataTreeValues((name) => new DataTreeNode(this.owner, this.owner._nextKey, this, name));
+        this.owner = owner;
         this._parent = parent;
         this.value = value;
         if (this._parent) {
@@ -94,10 +94,12 @@ class DataTreeNode {
         } else {
             this.parent = -1;
         }
+        this._queryProvider = null;
 
-        Object.defineProperty(this, '_owner', {enumerable: false});
+        Object.defineProperty(this, 'owner', {enumerable: false});
         Object.defineProperty(this, '_parent', {enumerable: false});
         Object.defineProperty(this, '_value', {enumerable: false, writable: true});
+        Object.defineProperty(this, '_queryProvider', {enumerable: false});
         Object.defineProperty(this, 'value', {
             enumerable: true,
             get() {
@@ -107,8 +109,8 @@ class DataTreeNode {
             set(value) {
                 if (this._value !== value) {
                     this._value = value;
-                    if (this._owner) {
-                        this._owner._update(this);
+                    if (this.owner) {
+                        this.owner._update(this);
                     }
                 }
             }
@@ -117,7 +119,7 @@ class DataTreeNode {
         Object.defineProperty(this, 'name', {writable: false}); // name is read-only
         Object.defineProperty(this, 'id', {writable: false}); // id is read-only
 
-        this._owner._update(this);
+        this.owner._update(this);
     }
 
     /**
@@ -137,8 +139,8 @@ class DataTreeNode {
      * @param marker
      */
     sendChangeMarker(marker) {
-        if (this._owner) {
-            this._owner._sendChangeMarker(path, marker);
+        if (this.owner) {
+            this.owner._sendChangeMarker(path, marker);
         }
     }
 
@@ -192,9 +194,9 @@ class DataTreeNode {
      * @param fromParent
      */
     delete(fromParent = false) {
-        if (this._owner != null) {
-            this._owner._delete(this);
-            this._owner = null;
+        if (this.owner != null) {
+            this.owner._delete(this);
+            this.owner = null;
             this.values.clear();
             if (!fromParent && (this._parent != null)) {
                 this._parent._delChild(this)
@@ -210,19 +212,18 @@ class DataTreeSource {
         this._store = new DataListSource({
             query: (params) => {
                 const {path, type, query} = params || {};
-                console.log('query passed ', params);
                 if (path != null) {
-                    const node = this.liveValue(path);
-                    if (node.queryProvider != null) {
-                        return node.queryProvider.query(query);
+                    const node = this.liveValue(path), ctx = getConnCtx(this._store);
+                    if (node._queryProvider != null) {
+                        return node._queryProvider.query(query);
                     } else {
                         const provider = dataQueryProviders.get(type);
                         if (provider != null && typeof provider === 'function') {
                             if (provider.prototype != null) {
-                                node.queryProvider = new provider(node, ctx);
-                                return node.queryProvider.query(query);
+                                node._queryProvider = new provider(node, ctx);
+                                return node._queryProvider.query(query[0]);
                             } else {
-                                return provider(node, query, getConnCtx(this._store));
+                                return provider(node, query[0], getConnCtx(this._store));
                             }
                         }
                     }
@@ -233,7 +234,6 @@ class DataTreeSource {
         this._lastKey = 1;
         this._store.events.on('connected', () => {
             this._publish(this.root);
-            console.log('Tree Connected');
         });
         this._store.events.on('disconnected', () => console.log('Tree DisConnected'));
         this.root = new DataTreeNode(this, this._nextKey, null, '');

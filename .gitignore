@@ -87,3 +87,6 @@ AppEngine/NodeServer/srv/*.drc
 AppEngine/NodeServer/srv/*.rsm
 AppEngine/NodeServer/srv/*.drc
 AppEngine/NodeServer/srv/NCServices.map
+AppEngine/NodeServer/app/lib/Client.js
+AppEngine/NodeServer/app/lib/RemoteDataLists.js
+AppEngine/NodeServer/app/lib/RemoteDataListTree.js

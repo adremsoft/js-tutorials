@@ -73,4 +73,9 @@ am-todo .controls .btn {
   margin-left: auto;
   zoom: 0.75;
 }
+am-dashboard {
+  display: block;
+  padding: 10px;
+  margin: 10px;
+}
 /*# sourceMappingURL=styles.css.map */
