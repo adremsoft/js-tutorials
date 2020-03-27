@@ -13,7 +13,7 @@
                     Single tree element can be
                 </p>
                 <div>
-
+                    
                 </div>
             `,
             controller: class {
@@ -23,7 +23,7 @@
                     this.data = {};
                     //this.timerData = this.tree.def('timer', 'timer', this.data)
                     this.tree.query({
-                        path : 'timer',
+                        path: 'timer',
                         type: 'timer',
                         query: {
                             command: 'start', interval: 1000
