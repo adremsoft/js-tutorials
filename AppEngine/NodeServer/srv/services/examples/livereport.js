@@ -27,7 +27,17 @@ class ConsoleLog extends LiveReport {
         console.log = (...args) => {
             this.log.call(console, ...args);
             if (this.connected) {
-                super.update(this.nextKey, {message: args.join(' ')});
+                const message = args.map(s => {
+                    try {
+                        if (typeof s.toString === "function") {
+                            return s.toString()
+                        } else {
+                            return null;
+                        }
+                    } catch (e) {
+                    }
+                }).filter(s => s != null).join(' ');
+                super.update(this.nextKey, {message});
                 if (this.lastKey > MAX_RECS) {
                     super.deleteByKey(this.lastKey - MAX_RECS);
                 }

@@ -9,6 +9,7 @@ require("./examples/remote-interfaces")(server);
 require("./examples/livereport")(server);
 require("./examples/todolist")(server);
 require("./examples/datatree")(server);
+require("./examples/text-report")(server);
 
 // and then start the server
 server.run();

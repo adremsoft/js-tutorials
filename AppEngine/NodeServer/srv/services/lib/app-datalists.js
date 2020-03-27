@@ -19,6 +19,9 @@ const
 
 const
     NO_KEY = -1,
+    EVENT_CONNECTED = 1,
+    EVENT_DISCONNECTED = 0,
+    EVENT_OPENED = 100,
     DataListFieldType = {
         afString: 0,
         afBoolean: 1,
@@ -36,7 +39,8 @@ class CustomDataList {
     constructor(perform, intfName) {
         this.intfc = null;                  // Server Interface
         this.perform = perform;             // Interface for handling perform method calls
-        this.instId = ++dataListInstanceId;
+        dataListInstanceId += 1;
+        this.instId = dataListInstanceId;
         this.remoteIntf = intfName;
         this.events = new EventEmitter();
         this.connected = false;
@@ -46,11 +50,11 @@ class CustomDataList {
         if (this.intfc == null) {
             this.intfc = adrem.srv[this.remoteIntf]();
             adrem.Client.on(this.intfc.id, (e) => {
-                if (e.eventid === 1) {
+                if (e.eventid === EVENT_CONNECTED) {
                     this.onConnected()
-                } else if (e.eventid === 0) {
+                } else if (e.eventid === EVENT_DISCONNECTED) {
                     this.onDisconnected()
-                } else if (e.eventid === 100) {
+                } else if (e.eventid === EVENT_OPENED) {
                     this.onOpened();
                 }
             })
@@ -88,7 +92,7 @@ class CustomDataList {
     async open(tableName, fields, autoColumn = null, persistent = true) {
         let providerIntf = '';
         if (this.perform != null) {
-            providerIntf = '#' + (tableName || this._dl.id);
+            providerIntf = '#' + (tableName || this._dl.id.replace('.', '_'));
             registerRemoteInterface(providerIntf, this, true);
         }
         return new Promise(resolve => {
@@ -296,18 +300,16 @@ module.exports = {
      *
      * @param name
      * @param desc
-     * @param {function( src:String, prefix: String,  )}providerFunction
+     * @param {function( params : Object )} providerFunction
      * @return {*}
      */
     registerDataListSourceProvider(name, desc, providerFunction) {
         const
             intfName = registerRemoteInterface('#' + name, {
-                getDataListSource(src, params) {
-                    return providerFunction(src, params);
+                getDataListSource(params) {
+                    return providerFunction(params);
                 }
             }),
-            provider = new adrem.srv.IDataListSourceProvider();
-        provider.registerProvider(intfName, desc);
+            provider = new adrem.srv.IDataListSourceProvider({table : name, intf: intfName});
     }
 };
-
