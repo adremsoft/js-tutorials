@@ -3,8 +3,8 @@
     "use strict";
 
     angular.module("app.services")
-        .service("treeData", function () {
-            return {};
+        .service("dashboardData", function () {
+            return new adrem.RemoteDataListTree('srv', 'dashboard');
         });
 
 })();

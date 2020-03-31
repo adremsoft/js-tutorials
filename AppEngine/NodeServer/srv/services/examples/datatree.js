@@ -1,7 +1,8 @@
 "use strict";
 
 const
-    {registerQueryProvider, DataTreeSource} = require("../lib/app-datatree.js");
+    {registerQueryProvider, DataTreeSource} = require("../lib/app-datatree.js"),
+    NUMBER_OF_CPUS = require('os').cpus().length;
 
 registerQueryProvider('timer', class {
     constructor(node, ctx) {
@@ -47,6 +48,10 @@ registerQueryProvider('processor', class {
         this.interval = setInterval(() => this.publish(), 1000);
     }
 
+    hrtimeToMS(val) {
+        return val[0] * 1000 + val[1] / 1000000;
+    }
+
     init() {
         this.startTime = process.hrtime();
         this.startUsage = process.cpuUsage();
@@ -57,14 +62,14 @@ registerQueryProvider('processor', class {
 
     publish() {
         const
-            elapTime = process.hrtime(this.startTime),
-            elapUsage = process.cpuUsage(this.startUsage),
-            elapTimeMS = CPUSensor.hrtimeToMS(elapTime),
-            elapUserMS = elapUsage.user / 1000,
-            elapSystMS = elapUsage.system / 1000;
+            elapsedTime = process.hrtime(this.startTime),
+            elapsedUsage = process.cpuUsage(this.startUsage),
+            elapsedTimeMS = this.hrtimeToMS(elapsedTime),
+            elapsedUserMS = elapsedUsage.user / 1000,
+            elapsedSystMS = elapsedUsage.system / 1000;
 
         this.init();
-        this.node.value = Math.round(10000 * (elapUserMS + elapSystMS) / elapTimeMS / NUMBER_OF_CPUS) / 100;
+        this.node.value = Math.round(10000 * (elapsedUserMS + elapsedSystMS) / elapsedTimeMS / NUMBER_OF_CPUS) / 100;
     }
 });
 

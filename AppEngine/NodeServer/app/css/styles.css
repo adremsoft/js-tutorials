@@ -78,6 +78,23 @@ am-dashboard {
   padding: 10px;
   margin: 10px;
 }
+am-dashboard am-processor {
+  display: block;
+  margin: 15px 0;
+}
+am-dashboard am-timer {
+  display: block;
+  margin: 15px 0;
+}
+am-dashboard am-timer p {
+  background-color: white;
+  padding: 5px 10px;
+  border: 1px solid #006ad1;
+  color: #777;
+}
+am-dashboard am-timer p.active {
+  color: #4d90fe;
+}
 am-text-file {
   display: block;
   padding: 10px;

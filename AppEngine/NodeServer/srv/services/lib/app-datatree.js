@@ -221,7 +221,7 @@ class DataTreeSource {
                         if (provider != null && typeof provider === 'function') {
                             if (provider.prototype != null) {
                                 node._queryProvider = new provider(node, ctx);
-                                return node._queryProvider.query(query[0]);
+                                return node._queryProvider.query(Array.isArray(query) ? query[0] : query);
                             } else {
                                 return provider(node, query[0], getConnCtx(this._store));
                             }
