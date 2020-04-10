@@ -56,11 +56,11 @@ class AppServer {
         isPrivate = isPrivate || intfName.charAt(0) === '#';
         if (typeof def === 'object') {
             def[OBJ_ID] = intfName;
-            this.registered.set(intfName, {def, isPrivate})
+            this.registered.set(intfName, {def, isPrivate});
         } else if (typeof def === 'function') {
             this.registered.set(intfName, {def, instances: new Map(), lastId: 1});
         } else {
-            throw new Error("You can register object or prototype (class) function")
+            throw new Error("You can register object or prototype (class) function");
         }
         return intfName;
     }
@@ -72,7 +72,7 @@ class AppServer {
                 def.instances.clear();
                 def.def = null;
             }
-            this.registered.delete(intfName)
+            this.registered.delete(intfName);
         }
     }
 
@@ -96,19 +96,19 @@ class AppServer {
                     .filter(([name, desc]) => name !== 'constructor' && typeof desc.value === 'function')
                     .map(([name, desc]) => {
                         const args = Object.fromEntries($args(desc.value).map(name => ([name, "Variant"])));
-                        return ([name, args])
+                        return ([name, args]);
                     }));
             return {
                 GUID: name,
                 Methods: methods
-            }
+            };
         }
 
         // Return interface definition
         return Object.fromEntries(Array.from(this.registered.entries())
             .filter(([name, def]) => !def.isPrivate)
             .map(([name, def]) => ([name, getInterfaceDef(name, def.def)]))
-        )
+        );
     }
 
     getInst(interfaceName, instance) {
@@ -155,8 +155,8 @@ class AppServer {
     start() {
         return new Promise(resolve => {
             adrem.initClient();
-            adrem.Client.start((result) => resolve(result))
-        })
+            adrem.Client.start((result) => resolve(result));
+        });
     }
 
     async handleRequest(req) {
@@ -168,21 +168,22 @@ class AppServer {
         function doCall(f) {
             if (typeof f === 'function') {
                 if (Array.isArray(param)) {
-                    return f.call(instance, ...param)
+                    return f.call(instance, ...param);
                 } else {
-                    return f.call(instance, param)
+                    return f.call(instance, param);
                 }
             }
         }
+
         if (this.trace) {
             console.log(req);
         }
         if (instance != null) {
             this.setConnContext(conn, instance);
             if (submethod) {
-                return doCall(instance[method][submethod])
+                return doCall(instance[method][submethod]);
             } else {
-                return doCall(instance[method])
+                return doCall(instance[method]);
             }
         }
     }
@@ -194,7 +195,7 @@ const
 
 appServer.register('Server', {
     test(params) {
-        console.log('Test called of Server interface', params)
+        console.log('Test called of Server interface', params);
     },
 
     getInterfaces() {
@@ -202,7 +203,7 @@ appServer.register('Server', {
     },
 
     openConn(connId, context) {
-        appServer.openConn(connId, context)
+        appServer.openConn(connId, context);
     },
 
     closeConn(connId, context) {
@@ -210,11 +211,11 @@ appServer.register('Server', {
     },
 
     getInstance(interfaceName) {
-        return appServer.newInst(interfaceName)
+        return appServer.newInst(interfaceName);
     },
 
     releaseInstance(interfaceName, instance) {
-        appServer.releaseInst(interfaceName, instance)
+        appServer.releaseInst(interfaceName, instance);
     }
 }, true);
 
@@ -223,12 +224,25 @@ let
 
 module.exports = {
     ready: new Promise(resolve => serverStarted = resolve),
+    currentAtlasInfo: {},
+    adrem,
+
+    // shared services kind of dependency injection
+    services: {},
+
+    registerService(name, serviceObj) {
+        if (this.services[name] == null) {
+            this.services[name] = serviceObj;
+        } else {
+            console.error(`Service ${name} registered already`);
+        }
+    },
 
     /**
      * Run Server
-     * @return {Promise<unknown>}
+     * @return {Promise<*>}
      */
-    run() {
+    run(beforStarted) {
         appServer.start().then(() => {
             adrem.Client.on('exception', e => console.error(e));
             adrem.Client.on(adrem.srv.IServer.id, (e) => {
@@ -244,10 +258,38 @@ module.exports = {
                         if (e.data.id != null) {
                             adrem.srv.IServer.response({id: e.data.id, res: []});
                         }
-                    })
+                    });
             });
-            adrem.srv.IServer.notifyStarted(() => serverStarted());
+
+            if (adrem.ncSrv.ICurrentAtlas != null) {
+                const currentAtlas = new adrem.ncSrv.ICurrentAtlas();
+                adrem.Client.on(currentAtlas.id, e => {
+                    if (e.data.Id !== this.currentAtlasInfo.Id) {
+                        console.log('NodeServer: Atlas changed - restarting');
+                        adrem.srv.IServer.restart();
+                    }
+                    this.currentAtlasInfo = e.data;
+                });
+
+                currentAtlas.GetAtlasInfo(info => {
+                    if (info != null && info.Id > 0) {
+                        this.currentAtlasInfo = info;
+                        adrem.srv.IServer.notifyStarted(async () => {
+                            if (beforStarted != null && typeof beforStarted === 'function') {
+                                await beforStarted();
+                            }
+                            serverStarted();
+                        });
+                    } else {
+                        console.log('NodeServer: No Atlas loaded - exiting (after 15sec)');
+                        setTimeout(() => adrem.srv.IServer.restart(), 15 * 1000);
+                    }
+                });
+            } else {
+                serverStarted();
+            }
         });
+
         return this.ready;
     },
 
@@ -290,4 +332,4 @@ global.restart = function () {
     adrem.srv.IServer.restart();
 };
 
-global._server = appServer;
+global._appServer = appServer;

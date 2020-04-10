@@ -42,12 +42,12 @@ class DataTreeValues extends Map {
         const c = this.get(key);
         if (c != null) {
             c.delete(true);
-            super.delete(key)
+            super.delete(key);
         }
     }
 
     _getValueNode(name, allowCreate = true) {
-        return this.get(name) || (allowCreate ? this._createChild(name) : null)
+        return this.get(name) || (allowCreate ? this._createChild(name) : null);
     }
 
     /**
@@ -140,7 +140,7 @@ class DataTreeNode {
      */
     sendChangeMarker(marker) {
         if (this.owner) {
-            this.owner._sendChangeMarker(path, marker);
+            this.owner._sendChangeMarker(this.path, marker);
         }
     }
 
@@ -199,7 +199,7 @@ class DataTreeNode {
             this.owner = null;
             this.values.clear();
             if (!fromParent && (this._parent != null)) {
-                this._parent._delChild(this)
+                this._parent._delChild(this);
             }
             this._parent = null;
             delete this.values;
@@ -247,7 +247,7 @@ class DataTreeSource {
     }
 
     get connected() {
-        return this._store.connected
+        return this._store.connected;
     }
 
     get _nextKey() {
@@ -275,7 +275,7 @@ class DataTreeSource {
     _update(node) {
         //console.log('updating ', node);
         if (this.connected) {
-            this._store.update(node)
+            this._store.update(node);
         }
     }
 

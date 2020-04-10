@@ -18,10 +18,6 @@ class TextFile extends LiveReport {
         this.fileName = fileName;
 
         console.log('TextFile created ', fileName);
-
-        // it's important to open as open attaches this object to server and
-        // assigns intfc.is
-        this.open();
     }
 
     get nextKey() {
@@ -31,7 +27,7 @@ class TextFile extends LiveReport {
 
     open() {
         this.events.once('opened', () => this.load());
-        super.open('', [
+        return super.open('', [
             {fieldName: 'line', fieldType: DataListFieldType.afString}
         ], null, true);
     }
@@ -53,7 +49,6 @@ module.exports = async function (server) {
     // This is like class factory for DataLists
     // So clients can open multiple files by passing tableName as 'TextFile:{"fileName":"info.txt"}'
     registerDataListSourceProvider('TextFile', '', (params) => {
-        const source = new TextFile(params.fileName);
-        return {provider: source.intfc.id, autoRelease: true};
+        return {source: new TextFile(params.fileName), autoRelease: true};
     })
 };

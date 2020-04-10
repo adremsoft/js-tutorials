@@ -15,9 +15,10 @@
 
 const
     EventEmitter = require('events'),
-    {registerRemoteInterface} = require("./app-server");
+    {adrem, registerRemoteInterface, releaseRemoteInterface} = require("./app-server");
 
 const
+    AUTO_KEY = -1,
     NO_KEY = -1,
     EVENT_CONNECTED = 1,
     EVENT_DISCONNECTED = 0,
@@ -26,6 +27,7 @@ const
         afString: 0,
         afBoolean: 1,
         afFloat: 2,
+        afDate: 2, // it's just an alias to float
         afInt32: 3,
         afInt64: 4,
         afVariant: 5,
@@ -44,26 +46,40 @@ class CustomDataList {
         this.remoteIntf = intfName;
         this.events = new EventEmitter();
         this.connected = false;
+        this.providerId = '';
     }
 
     get _dl() {
         if (this.intfc == null) {
             this.intfc = adrem.srv[this.remoteIntf]();
-            adrem.Client.on(this.intfc.id, (e) => {
-                if (e.eventid === EVENT_CONNECTED) {
-                    this.onConnected()
-                } else if (e.eventid === EVENT_DISCONNECTED) {
-                    this.onDisconnected()
-                } else if (e.eventid === EVENT_OPENED) {
-                    this.onOpened();
-                }
-            })
+            adrem.Client.on(this.intfc.id, this._onRemoteEvent, this);
         }
         return this.intfc;
     }
 
+    _onRemoteEvent(e) {
+        switch (e.eventid) {
+            case EVENT_CONNECTED :
+                this.onConnected();
+                break;
+            case EVENT_DISCONNECTED :
+                this.onDisconnected();
+                break;
+            case EVENT_OPENED :
+                this.onOpened();
+                break;
+        }
+    }
+
+    finalize() {
+        adrem.Client.un(this.intfc.id, this._onRemoteEvent, this);
+        if (this.providerId != null) {
+            releaseRemoteInterface(this.providerId);
+        }
+    }
+
     onOpened() {
-        this.events.emit('opened');
+        setTimeout(() => this.events.emit('opened'), 0);
     }
 
     /**
@@ -90,10 +106,10 @@ class CustomDataList {
      * @param  {Boolean} persistent
      */
     async open(tableName, fields, autoColumn = null, persistent = true) {
-        let providerIntf = '';
+        this.providerId = '';
         if (this.perform != null) {
-            providerIntf = '#' + (tableName || this._dl.id.replace('.', '_'));
-            registerRemoteInterface(providerIntf, this, true);
+            this.providerId = '#' + (tableName || this._dl.id.replace('.', '_'));
+            registerRemoteInterface(this.providerId, this, true);
         }
         return new Promise(resolve => {
             this.events.once('opened', () => {
@@ -102,8 +118,8 @@ class CustomDataList {
                     this.connected = true;
                 }
             });
-            this._dl.open(tableName, providerIntf, fields, autoColumn, persistent && (tableName !== ''));
-        })
+            this._dl.open(tableName, this.providerId, fields, autoColumn, persistent && (tableName !== ''));
+        });
     }
 
     /**
@@ -146,7 +162,7 @@ class CustomDataList {
      * Close DataList
      */
     close() {
-        this._dl.close()
+        this._dl.close();
     }
 }
 
@@ -177,14 +193,14 @@ class LiveReport extends CustomDataList {
      * @return {*}
      */
     uniqueKey(keyValue) {
-        return this._dl.uniqueKey(keyValue)
+        return this._dl.uniqueKey(keyValue);
     }
 
     /**
      * Clear all published cache data
      */
     clear() {
-        this._dl.clear()
+        this._dl.clear();
     }
 
     /**
@@ -202,7 +218,7 @@ class LiveReport extends CustomDataList {
      * @param data
      */
     updateList(parentKey, data) {
-        this._dl.updateList(parentKey, data)
+        this._dl.updateList(parentKey, data);
     }
 
     /**
@@ -235,14 +251,14 @@ class DataListSource extends CustomDataList {
      * @param  {Boolean} persistent
      */
     async open(tableName, fields, readOnly = true, persistent = true) {
-        const providerIntf = readOnly && this.perform == null ? '' : '#' + (tableName || this._dl.id);
-        if (providerIntf !== '') {
-            registerRemoteInterface(providerIntf, this, true);
+        this.providerId = readOnly && this.perform == null ? '' : '#' + (tableName || this._dl.id);
+        if (this.providerId !== '') {
+            registerRemoteInterface(this.providerId, this, true);
         }
         return new Promise(resolve => {
             this.events.once('opened', () => resolve());
-            this._dl.open(tableName, providerIntf, fields, persistent, readOnly);
-        })
+            this._dl.open(tableName, this.providerId, fields, persistent, readOnly);
+        });
     }
 
     /**
@@ -292,6 +308,7 @@ class DataListSource extends CustomDataList {
 
 module.exports = {
     NO_KEY,
+    AUTO_KEY,
     LiveReport,
     DataListSource,
     DataListFieldType,
@@ -300,16 +317,20 @@ module.exports = {
      *
      * @param name
      * @param desc
-     * @param {function( params : Object )} providerFunction
+     * @param {function( params : Object ) : { source : CustomDataList, autoRelease : Boolean }}  providerFunction
      * @return {*}
      */
     registerDataListSourceProvider(name, desc, providerFunction) {
         const
             intfName = registerRemoteInterface('#' + name, {
                 getDataListSource(params) {
-                    return providerFunction(params);
+                    const info = providerFunction(params) || {};
+                    if (info.source != null && info.source instanceof CustomDataList) {
+                        return info.source.open().then(() => ({provider: info.source.intfc.id, autoRelease: info.autoRelease}));
+                    }
+                    return null;
                 }
             }),
-            provider = new adrem.srv.IDataListSourceProvider({table : name, intf: intfName});
+            provider = new adrem.srv.IDataListSourceProvider({table: name, intf: intfName});
     }
 };
