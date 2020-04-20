@@ -102,10 +102,9 @@ class CustomDataList {
      *
      * @param  {String} tableName
      * @param  {Array<{fieldName : String, fieldType : DataListFieldType }>} fields
-     * @param  {{ name : String, doNotPublish : Boolean}} autoColumn
-     * @param  {Boolean} persistent
+     * @param {Boolean} persistent
      */
-    async open(tableName, fields, autoColumn = null, persistent = true) {
+    async open(tableName, fields, persistent = true) {
         this.providerId = '';
         if (this.perform != null) {
             this.providerId = '#' + (tableName || this._dl.id.replace('.', '_'));
@@ -118,8 +117,24 @@ class CustomDataList {
                     this.connected = true;
                 }
             });
-            this._dl.open(tableName, this.providerId, fields, autoColumn, persistent && (tableName !== ''));
+            this._dl.open(tableName, this.providerId, fields, persistent);
         });
+    }
+
+    /**
+     * Update record
+     * @param rec
+     */
+    update(rec) {
+        this._dl.update(rec);
+    }
+
+    /**
+     * Delete record by key
+     * @param key
+     */
+    delete(key) {
+        this._dl.delete(key);
     }
 
     /**
@@ -180,6 +195,40 @@ class LiveReport extends CustomDataList {
     }
 
     /**
+     *
+     * @param  {String} tableName
+     * @param  {Array<{fieldName : String, fieldType : DataListFieldType }>} fields
+     * @param  {{ name : String, doNotPublish : Boolean}} autoColumn
+     */
+    async open(tableName, fields, autoColumn = null) {
+        const persistent = tableName !== '';
+        this.providerId = '';
+        if (this.perform != null) {
+            this.providerId = '#' + (tableName || this._dl.id.replace('.', '_'));
+            registerRemoteInterface(this.providerId, this, true);
+        }
+        return new Promise(resolve => {
+            this.events.once('opened', () => {
+                resolve();
+                if (persistent) {
+                    this.connected = true;
+                }
+            });
+            this._dl.open(tableName, this.providerId, fields, autoColumn, persistent);
+        });
+    }
+
+
+    /**
+     *
+     * @param key
+     * @param rec
+     */
+    update(key, rec) {
+        this._dl.update(key, rec);
+    }
+
+    /**
      * Number of connected clients
      * @return {*}
      */
@@ -201,15 +250,6 @@ class LiveReport extends CustomDataList {
      */
     clear() {
         this._dl.clear();
-    }
-
-    /**
-     *
-     * @param key
-     * @param rec
-     */
-    update(key, rec) {
-        this._dl.update(key, rec);
     }
 
     /**
@@ -248,7 +288,7 @@ class DataListSource extends CustomDataList {
      * @param  {String} tableName
      * @param  {Array<{fieldName : String, fieldType : DataListFieldType }>} fields
      * @param  {Boolean} readOnly
-     * @param  {Boolean} persistent
+     * @param {Boolean} persistent
      */
     async open(tableName, fields, readOnly = true, persistent = true) {
         this.providerId = readOnly && this.perform == null ? '' : '#' + (tableName || this._dl.id);
@@ -257,24 +297,8 @@ class DataListSource extends CustomDataList {
         }
         return new Promise(resolve => {
             this.events.once('opened', () => resolve());
-            this._dl.open(tableName, this.providerId, fields, persistent, readOnly);
+            this._dl.open(tableName, this.providerId, fields, persistent && (tableName !== ''), readOnly);
         });
-    }
-
-    /**
-     * Update record
-     * @param rec
-     */
-    update(rec) {
-        this._dl.update(rec);
-    }
-
-    /**
-     * Delete record by key
-     * @param key
-     */
-    delete(key) {
-        this._dl.delete(key);
     }
 
     // Remote requests for modifying data source
@@ -326,7 +350,14 @@ module.exports = {
                 getDataListSource(params) {
                     const info = providerFunction(params) || {};
                     if (info.source != null && info.source instanceof CustomDataList) {
-                        return info.source.open().then(() => ({provider: info.source.intfc.id, autoRelease: info.autoRelease}));
+                        return info.source.open().then(() => {
+                            // live report needs table name to access its provider
+                            if (info.source instanceof LiveReport) {
+                                const sourceName = name + (params != null ? ':' + JSON.stringify(params) : '');
+                                info.source._dl.setProviderName(sourceName);
+                            }
+                            return {provider: info.source.intfc.id, autoRelease: info.autoRelease};
+                        });
                     }
                     return null;
                 }
